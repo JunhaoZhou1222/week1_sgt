@@ -1,1 +1,34 @@
 
+name: Hello World Workflow
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  hello-world-job:
+    name: Say Hello World
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 步骤1: 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # 步骤2: 打印Hello World
+      - name: Print Hello World
+        run: echo "🎉 Hello World from GitHub Actions!"
+      
+      # 步骤3: 显示当前时间
+      - name: Show current time
+        run: echo "🕐 The time is $(date)"
+      
+      # 步骤4: 显示Git信息
+      - name: Show Git info
+        run: |
+          echo "📝 Commit message: ${{ github.event.head_commit.message }}"
+          echo "👤 Author: ${{ github.event.head_commit.author.name }}"
